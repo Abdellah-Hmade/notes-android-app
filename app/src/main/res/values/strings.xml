@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">NotesApp</string>
+    <string name="home_notes_header">Your notes</string>
+</resources>
