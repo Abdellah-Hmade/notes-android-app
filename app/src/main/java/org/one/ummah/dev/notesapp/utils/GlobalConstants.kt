@@ -6,9 +6,8 @@ object GlobalConstants {
         "#FF643843",
         "#FF4C4C6D",
         "#FFF99B7D",
-        "0xFFFEFF86",
-        "0xFFF99B7D",
-        "0xFF1B9C85",
-        "0xFF8B1874"
+        "#FFFEFF86",
+        "#FF1B9C85",
+        "#FF8B1874"
     )
 }

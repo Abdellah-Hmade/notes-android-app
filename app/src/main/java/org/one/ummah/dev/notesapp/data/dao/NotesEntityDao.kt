@@ -18,14 +18,12 @@ abstract class NotesEntityDao {
 
     @Query(
         "Select * from notes order by " +
-                "case when :tableColumn = 0 And :ascOrDesc = 0 then title " +
-                "when :tableColumn = 0 And :ascOrDesc = 1 then title " +
-                "when :tableColumn = 1 And :ascOrDesc = 0 then date " +
-                "when :tableColumn = 1 And :ascOrDesc = 1 then date " +
-                "when :tableColumn = 2 And :ascOrDesc = 0 then color " +
-                "when :tableColumn = 2 And :ascOrDesc = 1 then color " +
-                "End" +
-                ", :ascOrDesc"
+                "case when :tableColumn = 0 And :ascOrDesc = 0 then title End DESC, " +
+                "case when :tableColumn = 0 And :ascOrDesc = 1 then title END ASC," +
+                "case when :tableColumn = 1 And :ascOrDesc = 0 then date  End DESC," +
+                "case when :tableColumn = 1 And :ascOrDesc = 1 then date  END ASC," +
+                "case when :tableColumn = 2 And :ascOrDesc = 0 then color End DESC," +
+                "case when :tableColumn = 2 And :ascOrDesc = 1 then color END ASC"
     )
     abstract fun getAllByOrder(tableColumn: Int, ascOrDesc: Int): Flow<List<NotesEntity>>
 

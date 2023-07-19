@@ -15,7 +15,7 @@ android {
         targetSdk 33
         versionCode 1
         versionName "1.0"
-
+        buildConfigField "String", "BUILD_TYPE", '"debug"'
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         vectorDrawables {
             useSupportLibrary true
@@ -23,6 +23,11 @@ android {
     }
 
     buildTypes {
+        debug {
+            debuggable true
+            minifyEnabled false // Disable code shrinking in debug mode
+            // Additional debug-specific configurations go here
+        }
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'

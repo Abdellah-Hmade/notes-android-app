@@ -12,7 +12,10 @@ class GetNotesOrderedUseCase(
     var varSortByColumn: SortByColumn = SortByColumn.DEFAULT_SORT
     var varSortAscOrDesc: SortAscOrDesc = SortAscOrDesc.DEFAULT_SORT
 
-    operator fun invoke(sortAscOrDesc: SortAscOrDesc?,sortByColumn: SortByColumn?): Flow<List<NotesDto>> {
+    operator fun invoke(
+        sortAscOrDesc: SortAscOrDesc?,
+        sortByColumn: SortByColumn?
+    ): Flow<List<NotesDto>> {
         sortByColumn?.let {
             varSortByColumn = it
         }
@@ -20,7 +23,7 @@ class GetNotesOrderedUseCase(
             varSortAscOrDesc = it
         }
         return notesRepository
-            .getAllSortNotes( varSortAscOrDesc, varSortByColumn).also {
+            .getAllSortNotes(varSortAscOrDesc, varSortByColumn).also {
 
                 varSortByColumn = SortByColumn.DATE
                 varSortAscOrDesc = SortAscOrDesc.DESC
