@@ -16,15 +16,23 @@ import org.one.ummah.dev.notesapp.ui.stats.Screen
 fun SetupNavigationsScreen(navController: NavHostController) {
 
     NavHost(
-        navController = navController,
-        startDestination = Screen.HomeScreen.route
+        navController = navController, startDestination = Screen.HomeScreen.route
     ) {
-        composable(route = Screen.HomeScreen.route) {
-            setupHomeScreen(navController = navController)
+        composable(
+            route = Screen.HomeScreen.route + "?message={message}", arguments = listOf(
+                navArgument(name = "message") {
+                    type = NavType.StringType
+                    nullable = true
+                    defaultValue = null
+                }
+            )
+        ) {
+            val message = it.arguments?.getString("message")
+
+            setupHomeScreen(navController = navController, message = message)
         }
         composable(
-            route = Screen.AddOrEditNoteScreen.route +
-                    "?noteId={noteId}&noteColor={noteColor}",
+            route = Screen.AddOrEditNoteScreen.route + "?noteId={noteId}&noteColor={noteColor}",
             arguments = listOf(
                 navArgument(
                     name = "noteId"
@@ -43,9 +51,7 @@ fun SetupNavigationsScreen(navController: NavHostController) {
             val color = it.arguments?.getLong("noteColor") ?: -1
             val noteId = it.arguments?.getInt("noteId") ?: -1
             AddEditNoteScreen(
-                navController = navController,
-                noteColor = color,
-                noteId = noteId
+                navController = navController, noteColor = color, noteId = noteId
             )
         }
     }

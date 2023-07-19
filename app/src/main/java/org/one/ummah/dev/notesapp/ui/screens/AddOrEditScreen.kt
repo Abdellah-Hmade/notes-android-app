@@ -24,6 +24,8 @@ import androidx.compose.material3.FloatingActionButton
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
+import androidx.compose.material3.SnackbarDuration
+import androidx.compose.material3.SnackbarHost
 import androidx.compose.material3.SnackbarHostState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
@@ -40,6 +42,7 @@ import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 import org.one.ummah.dev.notesapp.ui.components.TransparentHintTextField
 import org.one.ummah.dev.notesapp.ui.events.AddEditNotesEvents
+import org.one.ummah.dev.notesapp.ui.stats.Screen
 import org.one.ummah.dev.notesapp.ui.view_models.AddEditViewModel
 import org.one.ummah.dev.notesapp.utils.GlobalConstants
 import org.one.ummah.dev.notesapp.utils.ObjectUtils
@@ -76,18 +79,20 @@ fun AddEditNoteScreen(
             when (event) {
                 is AddEditViewModel.UiEvent.ShowSnackbar -> {
                     scaffoldState.showSnackbar(
-                        message = event.message
+                        message = event.message,
+                        duration = SnackbarDuration.Short
                     )
                 }
 
                 is AddEditViewModel.UiEvent.SaveNote -> {
-                    navController.navigateUp()
+                    navController.navigate(Screen.HomeScreen.route + "?message=${GlobalConstants.SAVE_MESSAGE}")
                 }
             }
         }
     }
 
     Scaffold(
+        snackbarHost = { SnackbarHost(scaffoldState) },
         floatingActionButton = {
             FloatingActionButton(
                 onClick = {

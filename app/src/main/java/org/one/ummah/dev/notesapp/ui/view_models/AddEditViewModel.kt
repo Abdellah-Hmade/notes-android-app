@@ -102,7 +102,6 @@ class AddEditViewModel @Inject constructor(
                 notesUseCase
                     .upsertNote(state.value.addOrEditNote, state.value.selectedNoteOrCreated)
                 _eventFlow.emit(UiEvent.SaveNote)
-
             } catch (ex: CustomException) {
                 ex.printStackTrace()
                 _eventFlow.emit(

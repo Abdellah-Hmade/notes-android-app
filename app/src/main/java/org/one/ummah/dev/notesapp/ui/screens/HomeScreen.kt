@@ -11,6 +11,7 @@ import androidx.compose.material.icons.filled.Add
 import androidx.compose.material.icons.filled.Sort
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
@@ -38,13 +39,22 @@ import org.one.ummah.dev.notesapp.utils.ObjectUtils
 @Composable
 fun setupHomeScreen(
     navController: NavController,
-    viewModel: HomeNotesViewModel = hiltViewModel()
+    viewModel: HomeNotesViewModel = hiltViewModel(),
+    message: String? = null
+
 ) {
     val state = viewModel.state.value
     val scope = rememberCoroutineScope()
     val snackBarHostState = remember { SnackbarHostState() }
 
+    LaunchedEffect(key1 = true) {
+        message?.let {
+            snackBarHostState.showSnackbar(message = it, duration = SnackbarDuration.Short)
+        }
+    }
+
     Scaffold(
+        snackbarHost = { SnackbarHost(hostState = snackBarHostState) },
         floatingActionButton = {
             addNoteButton {
                 navController.navigate(Screen.AddOrEditNoteScreen.route)
@@ -111,7 +121,8 @@ fun setupBodiesHomeScreen(
                     scope.launch {
                         val result = snackbarHostState.showSnackbar(
                             message = "Note deleted",
-                            actionLabel = "Undo"
+                            actionLabel = "Undo",
+                            duration = SnackbarDuration.Long
                         )
                         if (result == SnackbarResult.ActionPerformed) {
                             viewModel.onEvent(HomeNotesEvents.RestoreNote)

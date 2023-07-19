@@ -10,4 +10,5 @@ object GlobalConstants {
         "#FF1B9C85",
         "#FF8B1874"
     )
+    val SAVE_MESSAGE: String = "note was saved successfully"
 }
