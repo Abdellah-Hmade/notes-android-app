@@ -2,6 +2,7 @@ package org.one.ummah.dev.notesapp.ui.screens
 
 import android.annotation.SuppressLint
 import androidx.compose.animation.*
+import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
@@ -61,7 +62,7 @@ fun setupHomeScreen(
             }
         }
     ) {
-        Column {
+        Column(modifier = Modifier.background(MaterialTheme.colorScheme.background)) {
             setupHeadersHomeScreen(
                 sortByColumn = state.sortByColumn,
                 sortAscOrDesc = state.sortAscOrDesc,
@@ -84,7 +85,7 @@ fun setupHomeScreen(
                 navController = navController,
                 viewModel = viewModel,
                 scope = scope,
-                snackbarHostState = snackBarHostState
+                snackBarHostState = snackBarHostState
             )
         }
 
@@ -98,7 +99,7 @@ fun setupBodiesHomeScreen(
     navController: NavController,
     viewModel: HomeNotesViewModel,
     scope: CoroutineScope,
-    snackbarHostState: SnackbarHostState
+    snackBarHostState: SnackbarHostState
 ) {
     LazyColumn(modifier = Modifier.fillMaxSize()) {
         items(state.notesOrdered) { note ->
@@ -106,6 +107,7 @@ fun setupBodiesHomeScreen(
                 note = note,
                 modifier = Modifier
                     .fillMaxWidth()
+                    .padding(8.dp, 0.dp)
                     .clickable {
                         navController.navigate(
                             Screen.AddOrEditNoteScreen.route +
@@ -119,7 +121,7 @@ fun setupBodiesHomeScreen(
                 onDeleteClick = {
                     viewModel.onEvent(HomeNotesEvents.DeleteNoteEvent(note))
                     scope.launch {
-                        val result = snackbarHostState.showSnackbar(
+                        val result = snackBarHostState.showSnackbar(
                             message = "Note deleted",
                             actionLabel = "Undo",
                             duration = SnackbarDuration.Long
@@ -158,7 +160,9 @@ fun setupHeadersHomeScreen(
             verticalAlignment = Alignment.CenterVertically
         ) {
             Text(
-                modifier = Modifier.weight(8F),
+                modifier = Modifier
+                    .weight(8F)
+                    .padding(PaddingValues(8.dp, 0.dp, 0.dp, 0.dp)),
                 fontStyle = MaterialTheme.typography.headlineMedium.fontStyle,
                 fontSize = MaterialTheme.typography.headlineMedium.fontSize,
                 text = stringResource(id = R.string.home_notes_header)

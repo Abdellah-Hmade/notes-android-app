@@ -25,7 +25,8 @@ private val LightColorScheme = lightColorScheme(
     primary = PrimaryColor,
     secondary = SecondaryColor,
     background = BackgroundColor,
-    tertiary = TertiaryColor
+    tertiary = TertiaryColor,
+    onBackground = BackgroundColor
     /* Other default colors to override
     background = Color(0xFFFFFBFE),
     surface = Color(0xFFFFFBFE),
@@ -49,7 +50,8 @@ fun NotesAppTheme(
             val context = LocalContext.current
             if (darkTheme) dynamicDarkColorScheme(context) else dynamicLightColorScheme(context)
         }
-        darkTheme -> DarkColorScheme
+
+        darkTheme -> LightColorScheme
         else -> LightColorScheme
     }
     val view = LocalView.current
