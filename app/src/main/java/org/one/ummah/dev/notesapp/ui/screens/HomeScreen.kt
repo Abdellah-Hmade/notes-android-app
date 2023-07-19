@@ -31,6 +31,7 @@ import org.one.ummah.dev.notesapp.ui.events.HomeNotesEvents
 import org.one.ummah.dev.notesapp.ui.stats.NoteState
 import org.one.ummah.dev.notesapp.ui.stats.Screen
 import org.one.ummah.dev.notesapp.ui.view_models.HomeNotesViewModel
+import org.one.ummah.dev.notesapp.utils.ObjectUtils
 
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @ExperimentalMaterial3Api
@@ -98,7 +99,11 @@ fun setupBodiesHomeScreen(
                     .clickable {
                         navController.navigate(
                             Screen.AddOrEditNoteScreen.route +
-                                    "?noteId=${note.id}&noteColor=${note.color}"
+                                    "?noteId=${note.id}&noteColor=${
+                                        ObjectUtils.colorStringToLong(
+                                            color = note.color
+                                        )
+                                    }"
                         )
                     },
                 onDeleteClick = {

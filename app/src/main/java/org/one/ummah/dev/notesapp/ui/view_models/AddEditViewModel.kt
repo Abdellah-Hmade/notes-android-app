@@ -94,7 +94,8 @@ class AddEditViewModel @Inject constructor(
             }
 
             if (addOrEditNoteForm.contentTextField.text.value != addOrEditNoteForm.contentTextField.hint) {
-                _state.value.selectedNoteOrCreated.content = addOrEditNoteForm.contentTextField.hint
+                _state.value.selectedNoteOrCreated.content =
+                    addOrEditNoteForm.contentTextField.text.value
             }
             _state.value.selectedNoteOrCreated.color = addOrEditNoteForm.colorRadioButtonField.value
             try {

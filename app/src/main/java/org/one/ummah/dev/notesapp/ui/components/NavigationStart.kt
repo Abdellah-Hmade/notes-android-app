@@ -13,7 +13,7 @@ import org.one.ummah.dev.notesapp.ui.stats.Screen
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun setupNavigationsScreen(navController: NavHostController) {
+fun SetupNavigationsScreen(navController: NavHostController) {
 
     NavHost(
         navController = navController,
@@ -35,12 +35,12 @@ fun setupNavigationsScreen(navController: NavHostController) {
                 navArgument(
                     name = "noteColor"
                 ) {
-                    type = NavType.StringType
-                    defaultValue = "-1"
+                    type = NavType.LongType
+                    defaultValue = -1
                 },
             )
         ) {
-            val color = it.arguments?.getString("noteColor") ?: "-1"
+            val color = it.arguments?.getLong("noteColor") ?: -1
             val noteId = it.arguments?.getInt("noteId") ?: -1
             AddEditNoteScreen(
                 navController = navController,

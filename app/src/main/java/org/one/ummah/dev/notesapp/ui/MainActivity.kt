@@ -12,7 +12,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.compose.rememberNavController
 import dagger.hilt.android.AndroidEntryPoint
-import org.one.ummah.dev.notesapp.ui.components.setupNavigationsScreen
+import org.one.ummah.dev.notesapp.ui.components.SetupNavigationsScreen
 import org.one.ummah.dev.notesapp.ui.theme.NotesAppTheme
 
 @AndroidEntryPoint
@@ -27,7 +27,7 @@ class MainActivity : ComponentActivity() {
                     color = MaterialTheme.colorScheme.background
                 ) {
                     val navController = rememberNavController()
-                    setupNavigationsScreen(navController = navController)
+                    SetupNavigationsScreen(navController = navController)
                 }
             }
         }

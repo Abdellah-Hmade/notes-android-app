@@ -13,13 +13,34 @@ class ObjectUtils {
             return arrayOfNullables
         }
 
-        inline fun colorsStringToBase(color: Long): String {
+        fun colorsStringToBase(color: Long): String {
             var colorStr = color.toString()
-            colorStr = colorStr.replace("0x", "#")
+            if (colorStr.contains("0x"))
+                colorStr = colorStr.replace("0x", "#")
+            else {
+                colorStr = StringBuilder()
+                    .append("#")
+                    .append(colorStr).toString()
+            }
             return colorStr
         }
 
-        inline fun colorsBaseToFront(str: String?): Long {
+        fun colorStringToLong(color: String?): Long {
+            color?.let {
+                if (color.isNotBlank()) {
+                    val colorStr = color.replace("#", "")
+                    if (isNumeric(colorStr))
+                        return colorStr.toLong(16)
+                }
+            }
+            return -1
+        }
+
+        fun isNumeric(str: String): Boolean {
+            return str.matches("[0-9A-Fa-f]+".toRegex())
+        }
+
+        fun colorsBaseToFront(str: String?): Long {
             str?.let {
 
                 if (it.isNotBlank()) {

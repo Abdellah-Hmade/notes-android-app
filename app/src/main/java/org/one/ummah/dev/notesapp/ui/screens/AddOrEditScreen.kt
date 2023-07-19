@@ -48,7 +48,7 @@ import org.one.ummah.dev.notesapp.utils.ObjectUtils
 @Composable
 fun AddEditNoteScreen(
     navController: NavController,
-    noteColor: String,
+    noteColor: Long,
     noteId: Int,
     viewModel: AddEditViewModel = hiltViewModel()
 ) {
@@ -60,7 +60,13 @@ fun AddEditNoteScreen(
     }
     val noteBackgroundAnimatable = remember {
         Animatable(
-            Color(ObjectUtils.colorsBaseToFront(if (noteColor != "-1") noteColor else viewModel.addOrEditNoteForm.colorRadioButtonField.value))
+            Color(
+                if (noteColor > 0)
+                    noteColor
+                else
+                    ObjectUtils.colorStringToLong(viewModel.addOrEditNoteForm.colorRadioButtonField.value)
+
+            )
         )
     }
     val scope = rememberCoroutineScope()
